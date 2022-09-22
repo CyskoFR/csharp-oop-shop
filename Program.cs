@@ -17,6 +17,27 @@
 //Nel vostro programma principale, testate tutte le funzionalità della classe Prodotto.
 //BONUS: create un metodo che restituisca il codice con un pad left di 0 per arrivare a 8 caratteri (ad esempio codice 91 diventa 00000091, mentre codice 123445567 resta come è)
 
+// ---------------------------------
+
+//A partire da quanto già fatto con csharp-oop-shop dove vi era stato chiesto di creare una classe Prodotto generica per gestire un generico prodotto dello Shop, vi chiedo di essere più specifici e di creare le sottoclassi opportune di alcuni prodotti che potremmo identificare nel nostro shop.
+//In particolare immaginiamo che nel nostro shop possiamo commerciare le seguenti tipologie di prodotto:
+//Acqua(massimo 1.5L)
+//Sacchetto di Frutta a pezzi (al massimo puo contenere 5 pezzi di frutta)
+//Elettrodomestico
+//Cibo in Scatola (al massimo può contenere 300g di peso su una scatola)
+//Per ognuno dei seguenti prodotti più specifici vi si chiede di identificare quali potrebbero essere i loro attributi e metodi che eventualmente gli riguardano, ereditando i metodi e gli attributi generici dalla classe Prodotto creata nell’esercizio precedente.
+//Un esempio per la classe Acqua che eredità Prodotto è aggiungere i seguenti attributi e metodi:
+//attributo litri: per indicare quanti litri di acqua ci sono nella bottiglia di acqua
+//attributo ph: che indica il livello di acidità dell’acqua (sola lettura)
+//attributo sorgente: che indica la sorgente di provenienza dell’acqua (sola lettura)
+//... ecc ecc
+//metodo bevi (double litriDaBere) che toglie dall’attributo litri una quantità pari a litriDaBere di acqua se presenti.
+//metodo riempi(double litri) che riempie la bottiglia di acqua con tot litri di acqua, stando attenti a non riempirla troppo.
+//metodo svuota() che rimuove tutta l’acqua dalla bottiglia.
+//metodo stampaProdotto() che fa l’override del metodo di base StampaProdotto già dichiarato nella superclasse Prodotto (se non lo avete già fatto dichiaratelo anche nella classe prodotto è si occupa di stampare il “codice - nome”, l lo abbiamo chiamato NomeEsteso), per stampare oltre al codice e al nome dell’acqua, anche la sua sorgente, il ph e i litri contenuti.
+//un metodo statico convertiInGalloni(double litri) che presa una quantità di litri restituisca la conversione dei litri in galloni, sapendo che 1 litro è equivalente a 3,785 galloni (ricordatevi di codificare le costanti come 3.785 nel modo corretto come visto in classe).
+//Ricordatevi di creare questi metodi in maniera responsabile, in modo che non rendono “incoerente” lo stato dei vostri oggetti (ad esempio non posso bere più dei litri contenuti nella bottiglia, o non posso riempire più di tot una bottiglia!).
+
 Prodotto prodotto = new Prodotto();
 
 prodotto.SetNome("Asus ROG");
@@ -31,74 +52,3 @@ Console.WriteLine($"Descrizione: {prodotto.GetDescrizione()}");
 Console.WriteLine($"Prezzo: {prodotto.GetPrezzo()}");
 Console.WriteLine($"Prezzo + IVA: {prodotto.GetPrezzoIva()}");
 Console.WriteLine($"Nome Prodotto Esteso: {prodotto.GetNomeEsteso()}");
-
-public class Prodotto
-{
-    private int codice;
-    private string nome;
-    private string descrizione;
-    private decimal prezzo;
-    private int iva;
-
-    public Prodotto()
-    {
-        Random r = new Random();
-        this.codice = r.Next(1, 100000000);
-    }
-
-    public int GetCodice()
-    {
-        return this.codice;
-    }
-
-    public string GetNome()
-    {
-        return this.nome;
-    }
-
-    public string GetDescrizione()
-    {
-        return this.descrizione;
-    }
-
-    public decimal GetPrezzo()
-    {
-        return this.prezzo;
-    }
-
-    public int GetIva()
-    {
-        return this.iva;
-    }
-
-    public void SetNome(string nome)
-    {
-        this.nome = nome;
-    }
-
-    public void SetDescrizione(string descrizione)
-    {
-        this.descrizione = descrizione;
-    }
-
-    public void SetPrezzo(decimal prezzo)
-    {
-        this.prezzo = prezzo;
-    }
-
-    public void SetIva(int iva)
-    {
-        this.iva = iva;
-    }
-
-    public decimal GetPrezzoIva()
-    {
-        decimal prezzoPiuIva = GetPrezzo() + (GetPrezzo() * GetIva() / 100);
-        return prezzoPiuIva;
-    }
-
-    public string GetNomeEsteso()
-    {
-        return GetCodice() + GetNome().Replace(" ", String.Empty);
-    }
-}
